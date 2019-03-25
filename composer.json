@@ -13,5 +13,20 @@
   ],
   "require": {
     "php": ">=7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "PPSpaces\\": "src"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "PPSpaces\\RepositoryServiceProvider"
+      ]
+    }
   }
 }
