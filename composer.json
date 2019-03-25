@@ -1,0 +1,17 @@
+{
+  "name": "pp-spaces/laravel-repository",
+  "description": "Repository Pattern implementation for Laravel",
+  "type": "library",
+  "license": "Unlicense",
+  "authors": [
+    {
+      "name": "Socheat",
+      "email": "socheatsok78@gmail.com",
+      "homepage": "https://socheat.net",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=7.0"
+  }
+}
