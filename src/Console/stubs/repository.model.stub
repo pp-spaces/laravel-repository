@@ -1,0 +1,85 @@
+<?php
+
+namespace DummyNamespace;
+
+use PPSpaces\Repositories\ModelRepository;
+
+class DummyClass extends ModelRepository {
+
+    /**
+     * The model instance.
+     *
+     * @var string
+     */
+    protected $DummyModelVariable;
+
+    /**
+     * Create a new repository instance.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model $DummyModelVariable
+     * @return void
+     */
+    public function __construct(DummyModelClass $DummyModelVariable) {}
+
+    /**
+     * Get all of the models from the database.
+     *
+     * @param  array|mixed  $columns
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function all($columns = ['*']) {
+        // return $this->get($columns);
+    }
+
+    /**
+     * Dynamically retrieve attributes on the model.
+     *
+     * @param  array  $columns
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function get($columns = ['*']) {
+        // return $this->DummyModelVariable->get($columns);
+    }
+
+    /**
+     * Get a new query of one model by their IDs.
+     *
+     * @param  array|int  $ids
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function find($id) {
+        // return $this->DummyModelVariable->findOrFail($id);
+    }
+
+    /**
+     * Perform a model create operation.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model $query
+     * @return bool
+     */
+    public function create(array $attributes) {
+        // return $this->DummyModelVariable->create($attributes);
+    }
+
+    /**
+     * Update the model in the database.
+     *
+     * @param  array  $attributes
+     * @param  array  $options
+     * @return bool
+     */
+    public function update(array $attributes = []) {
+        // return $this->DummyModelVariable->update($attributes);
+    }
+
+    /**
+     * Delete the model from the database.
+     *
+     * @return bool|null
+     *
+     * @throws \Exception
+     */
+    public function delete($id) {
+        // return $this->DummyModelVariable->findOrFail($id)->delete();
+    }
+}
