@@ -8,9 +8,9 @@ use PPSpaces\Repositories\Model as Repository;
 class DummyClass extends Repository {
 
     /**
-     * The model instance.
+     * The DummyModelVariable model instance.
      *
-     * @var string
+     * @var \DummyFullModelClass
      */
     protected $DummyModelVariable;
 

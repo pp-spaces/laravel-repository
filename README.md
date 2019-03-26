@@ -93,19 +93,21 @@ use PPSpaces\Repositories\Model as Repository;
 
 class UserRepository extends Repository {
 
+    protected $user;
+
     public function __construct(User $user) {
-        $this->model = $user;
+        $this->user = $user;
     }
 
     public function all($columns = ['*']) {
-        return $this->model
+        return $this->user
             ->role('staff')
             ->paginate();
     }
 }
 ```
 
-> NOTE: Check `PPSpaces\Repositories\Model` for available methods that you may override.
+> NOTE: Check `PPSpaces\Repositories\Model` for available methods that you may override. Keep in mind that you still have access to all Model instance that you've created. The `$this->user` is the instance of your `\App\User` model.
 
 Within your `UserController` assume you have a resource controller created. Inject the `UserRepository` to the contoller.
 
