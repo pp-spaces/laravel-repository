@@ -1,0 +1,22 @@
+<?php
+
+namespace DummyNamespace;
+
+class DummyClass {
+
+    /**
+     * Repository instance
+     */
+    protected $repository;
+
+    /**
+     * Create a new Eloquent model instance.
+     *
+     * @param  array  $repository
+     * @return void
+     */
+    public function __construct(array $repository) {
+        $this->repository = $repository;
+    }
+
+}
