@@ -1,5 +1,9 @@
 # Laravel Repository Design Pattern
 
+[![Latest Stable Version](https://poser.pugx.org/pp-spaces/laravel-repository/v/stable)](https://packagist.org/packages/pp-spaces/laravel-repository)
+[![Total Downloads](https://poser.pugx.org/pp-spaces/laravel-repository/downloads)](https://packagist.org/packages/pp-spaces/laravel-repository)
+[![License](https://poser.pugx.org/pp-spaces/laravel-repository/license)](https://packagist.org/packages/pp-spaces/laravel-repository)
+
 ## Contents
 
 - [What is the Repository Design Pattern?](#what-is-the-repository-design-pattern)
