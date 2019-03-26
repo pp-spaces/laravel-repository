@@ -23,6 +23,14 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->registerApplicationCommands();
+    }
+
+    protected function registerApplicationCommands() {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                Console\RepositoryMakeCommand::class,
+            ]);
+        }
     }
 }
