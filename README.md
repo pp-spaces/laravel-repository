@@ -75,6 +75,63 @@ php artisan make:repository UserRepository --model=User
    +-------------+                                +-------------+       +-------------+
 ```
 
+### How to use Repository
+
+Create your repository, e.g. `UserRepository` for `User` model:
+
+```sh
+php artisan make:repository UserRepository --model=User
+```
+
+Update `UserRepository` logic:
+
+```php
+namespace App\Repositories;
+
+use App\User;
+use PPSpaces\Repositories\Model as Repository;
+
+class UserRepository extends Repository {
+
+    public function __construct(User $user) {
+        $this->model = $user;
+    }
+
+    public function all($columns = ['*']) {
+        return $this->model
+            ->role('staff')
+            ->paginate();
+    }
+}
+```
+
+> NOTE: Check `PPSpaces\Repositories\Model` for available methods that you may override.
+
+Within your `UserController` assume you have a resource controller created. Inject the `UserRepository` to the contoller.
+
+```php
+use App\Repositories\UserRepository;
+
+class UserController extends Controller
+{
+    protected $users;
+
+    public function __construct(UserRepository $users)
+    {
+        $this->users = $users;
+    }
+}
+```
+
+Now you can access the repository in your controller method:
+
+```php
+public function index()
+{
+    return $this->users->all();
+}
+```
+
 ## Help
 
 ```
