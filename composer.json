@@ -1,6 +1,13 @@
 {
   "name": "pp-spaces/laravel-repository",
   "description": "Repository Design Pattern implementation for Laravel",
+  "keywords": [
+    "pp-spaces",
+    "laravel",
+    "repository",
+    "laravel-repository",
+    "repository-pattern"
+  ],
   "type": "library",
   "license": "MIT",
   "authors": [
