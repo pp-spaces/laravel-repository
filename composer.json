@@ -2,7 +2,7 @@
   "name": "pp-spaces/laravel-repository",
   "description": "Repository Pattern implementation for Laravel",
   "type": "library",
-  "license": "Unlicense",
+  "license": "MIT",
   "authors": [
     {
       "name": "Socheat",
