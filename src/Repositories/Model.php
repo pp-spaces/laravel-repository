@@ -2,9 +2,9 @@
 
 namespace PPSpaces\Repositories;
 
-use PPSpaces\Contracts\EloquentRepository as RepositoryInterface;
+use PPSpaces\Contracts\Model as RepositoryContract;
 
-abstract class EloquentRepository implements RepositoryInterface {
+abstract class Model implements RepositoryContract {
 
     /**
      * The model instance.

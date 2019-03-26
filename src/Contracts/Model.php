@@ -2,7 +2,7 @@
 
 namespace PPSpaces\Contracts;
 
-interface EloquentRepository
+interface Model
 {
 
     /**
