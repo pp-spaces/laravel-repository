@@ -3,9 +3,9 @@
 namespace DummyNamespace;
 
 use DummyFullModelClass;
-use PPSpaces\Repositories\ModelRepository;
+use PPSpaces\Repositories\Model as Repository;
 
-class DummyClass extends ModelRepository {
+class DummyClass extends Repository {
 
     /**
      * The model instance.
@@ -17,7 +17,7 @@ class DummyClass extends ModelRepository {
     /**
      * Create a new repository instance.
      *
-     * @param  \DummyFullModelClass $DummyModelVariable
+     * @param  \DummyFullModelClass  $DummyModelVariable
      * @return void
      */
     public function __construct(DummyModelClass $DummyModelVariable) {}
@@ -55,7 +55,7 @@ class DummyClass extends ModelRepository {
     /**
      * Perform a model create operation.
      *
-     * @param  \DummyFullModelClass $query
+     * @param  \DummyFullModelClass  $query
      * @return bool
      */
     public function create(array $attributes) {
