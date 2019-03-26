@@ -85,28 +85,6 @@ class RepositoryMakeCommand extends GeneratorCommand
     }
 
     /**
-     * Build the replacements for a parent controller.
-     *
-     * @return array
-     */
-    protected function buildParentReplacements()
-    {
-        $parentModelClass = $this->parseModel($this->option('parent'));
-
-        if (! class_exists($parentModelClass)) {
-            if ($this->confirm("A {$parentModelClass} model does not exist. Do you want to generate it?", true)) {
-                $this->call('make:model', ['name' => $parentModelClass]);
-            }
-        }
-
-        return [
-            'ParentDummyFullModelClass' => $parentModelClass,
-            'ParentDummyModelClass' => class_basename($parentModelClass),
-            'ParentDummyModelVariable' => lcfirst(class_basename($parentModelClass)),
-        ];
-    }
-
-    /**
      * Build the model replacement values.
      *
      * @param  array  $replace
