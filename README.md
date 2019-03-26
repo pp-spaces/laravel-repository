@@ -4,6 +4,10 @@
 
 - [What is the Repository Design Pattern?](#what-is-the-repository-design-pattern)
 - [Usage](#usage)
+  - [Installation](#installation)
+  - [Make a repository](#make-a-repository)
+  - [Use Case](#use-case)
+  - [Help](#help)
 
 ## What is the Repository Design Pattern
 
@@ -54,6 +58,28 @@ To make model repository simply run:
 
 ```sh
 php artisan make:repository UserRepository --model=User
+```
+
+## Use Case
+
+```
++--------------------------------------------------------------------------+
+|  +-------------+  +-------------+   +-------------+   +-------------+    |
+|  |             |  |    Index    |   |             |   |             |    |
+|  |             |  +-------------+   |             |   |             |    |
+|  |             |  +-------------+   |             |   |             |    |
+|  |             |  |    Show     |   |             |   |             |    |
+|  |             |  +-------------+   |             |   |             |    |
+|  |             |  +-------------+   |             |   |             |    |
+|  | Controller  |  |    Store    |   | Repository  |   |   Model     |    |
+|  |             |  +-------------+   |             |   |             |    |
+|  |             |  +-------------+   |             |   |             |    |
+|  |             |  |   Update    |   |             |   |             |    |
+|  |             |  +-------------+   |             |   |             |    |
+|  |             |  +-------------+   |             |   |             |    |
+|  |             |  |   Delete    |   |             |   |             |    |
+|  +-------------+  +-------------+   +-------------+   +-------------+    |
++--------------------------------------------------------------------------+
 ```
 
 ## Help
