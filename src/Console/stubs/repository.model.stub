@@ -47,7 +47,7 @@ class DummyClass extends Repository {
     /**
      * Get a new query of one model by their IDs.
      *
-     * @param  array|int  $ids
+     * @param  array|int  $id
      * @return \DummyFullModelClass
      */
     public function find($id) {
@@ -57,7 +57,7 @@ class DummyClass extends Repository {
     /**
      * Perform a model create operation.
      *
-     * @param  \DummyFullModelClass  $query
+     * @param  array  $attributes
      * @return bool
      */
     public function create(array $attributes) {
