@@ -20,7 +20,9 @@ class DummyClass extends Repository {
      * @param  \DummyFullModelClass  $DummyModelVariable
      * @return void
      */
-    public function __construct(DummyModelClass $DummyModelVariable) {}
+    public function __construct(DummyModelClass $DummyModelVariable) {
+        $ths->DummyModelVariable = $DummyModelVariable;
+    }
 
     /**
      * Get all of the models from the database.
