@@ -12,7 +12,7 @@ class DummyClass extends Repository {
      *
      * @var \DummyFullModelClass
      */
-    protected $repo;
+    protected $repository;
 
     /**
      * Create a new repository instance.
@@ -21,7 +21,7 @@ class DummyClass extends Repository {
      * @return void
      */
     public function __construct(DummyModelClass $DummyModelVariable) {
-        $this->repo = $DummyModelVariable;
+        $this->repository = $DummyModelVariable;
     }
 
     /**
@@ -41,7 +41,7 @@ class DummyClass extends Repository {
      * @return \DummyFullModelClass
      */
     public function get($columns = ['*']) {
-        return $this->repo->get($columns);
+        return $this->repository->get($columns);
     }
 
     /**
@@ -51,7 +51,7 @@ class DummyClass extends Repository {
      * @return \DummyFullModelClass
      */
     public function find($id) {
-        // return $this->repo->findOrFail($id);
+        // return $this->repository->findOrFail($id);
     }
 
     /**
@@ -61,7 +61,7 @@ class DummyClass extends Repository {
      * @return bool
      */
     public function create(array $attributes) {
-        // return $this->repo->create($attributes);
+        // return $this->repository->create($attributes);
     }
 
     /**
@@ -72,7 +72,7 @@ class DummyClass extends Repository {
      * @return bool
      */
     public function update(array $attributes = []) {
-        // return $this->repo->update($attributes);
+        // return $this->repository->update($attributes);
     }
 
     /**
@@ -83,6 +83,6 @@ class DummyClass extends Repository {
      * @throws \Exception
      */
     public function delete($id) {
-        // return $this->repo->findOrFail($id)->delete();
+        // return $this->repository->findOrFail($id)->delete();
     }
 }
