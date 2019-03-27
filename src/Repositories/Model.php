@@ -2,9 +2,10 @@
 
 namespace PPSpaces\Repositories;
 
+use Illuminate\Contracts\Routing\UrlRoutable;
 use PPSpaces\Contracts\Model as RepositoryContract;
 
-abstract class Model implements RepositoryContract {
+abstract class Model implements RepositoryContract, UrlRoutable {
 
     /**
      * The repository instance.
