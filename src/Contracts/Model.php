@@ -57,33 +57,12 @@ interface Model
     public function delete($id);
 
     /**
-     * Get the value of the model's route key.
+     * Destroy the models for the given IDs.
      *
-     * @return mixed
+     * @param  \Illuminate\Support\Collection|array|int  $ids
+     * @return int
      */
-    public function getRouteKey();
-
-    /**
-     * Get the route key for the model.
-     *
-     * @return string
-     */
-    public function getRouteKeyName();
-
-    /**
-     * Retrieve the model for a bound value.
-     *
-     * @param  mixed  $value
-     * @return \Illuminate\Database\Eloquent\Model|null
-     */
-    public function resolveRouteBinding($value);
-
-    /**
-     * Convert the object into something JSON serializable.
-     *
-     * @return array
-     */
-    public function jsonSerialize();
+    public static function destroy($ids);
 
     /**
      * Convert the model to its string representation.
