@@ -7,11 +7,11 @@ use PPSpaces\Contracts\Model as RepositoryContract;
 abstract class Model implements RepositoryContract {
 
     /**
-     * The model instance.
+     * The repository instance.
      *
-     * @var string
+     * @var \Illuminate\Database\Eloquent\Model
      */
-    protected $model;
+    protected $repo;
 
     /**
      * Create a new repository instance.
@@ -38,7 +38,7 @@ abstract class Model implements RepositoryContract {
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function get($columns = ['*']) {
-        return $this->model->get($columns);
+        return $this->repo->get($columns);
     }
 
     /**
@@ -48,7 +48,7 @@ abstract class Model implements RepositoryContract {
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function find($id) {
-        return $this->model->findOrFail($id);
+        return $this->repo->findOrFail($id);
     }
 
     /**
@@ -58,7 +58,7 @@ abstract class Model implements RepositoryContract {
      * @return bool
      */
     public function create(array $attributes) {
-        return $this->model->create($attributes);
+        return $this->repo->create($attributes);
     }
 
     /**
@@ -69,7 +69,7 @@ abstract class Model implements RepositoryContract {
      * @return bool
      */
     public function update(array $attributes = []) {
-        return $this->model->update($attributes);
+        return $this->repo->update($attributes);
     }
 
     /**
@@ -80,7 +80,7 @@ abstract class Model implements RepositoryContract {
      * @throws \Exception
      */
     public function delete($id) {
-        return $this->model->findOrFail($id)->delete();
+        return $this->repo->findOrFail($id)->delete();
     }
 
     /**
@@ -90,7 +90,7 @@ abstract class Model implements RepositoryContract {
      */
     public function getRouteKey()
     {
-        return $this->model->getAttribute($this->getRouteKeyName());
+        return $this->repo->getAttribute($this->getRouteKeyName());
     }
 
     /**
@@ -100,7 +100,7 @@ abstract class Model implements RepositoryContract {
      */
     public function getRouteKeyName()
     {
-        return $this->model->getKeyName();
+        return $this->repo->getKeyName();
     }
 
     /**
@@ -111,7 +111,7 @@ abstract class Model implements RepositoryContract {
      */
     public function resolveRouteBinding($value)
     {
-        return $this->model->where($this->getRouteKeyName(), $value)->first();
+        return $this->repo->where($this->getRouteKeyName(), $value)->first();
     }
 
     /**
@@ -121,7 +121,7 @@ abstract class Model implements RepositoryContract {
      */
     public function jsonSerialize()
     {
-        return $this->model->toArray();
+        return $this->repo->toArray();
     }
 
     /**
@@ -131,6 +131,6 @@ abstract class Model implements RepositoryContract {
      */
     public function __toString()
     {
-        return $this->model->toJson();
+        return $this->repo->toJson();
     }
 }

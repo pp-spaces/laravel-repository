@@ -12,7 +12,7 @@ class DummyClass extends Repository {
      *
      * @var \DummyFullModelClass
      */
-    protected $DummyModelVariable;
+    protected $repo;
 
     /**
      * Create a new repository instance.
@@ -21,7 +21,7 @@ class DummyClass extends Repository {
      * @return void
      */
     public function __construct(DummyModelClass $DummyModelVariable) {
-        $this->DummyModelVariable = $DummyModelVariable;
+        $this->repo = $DummyModelVariable;
     }
 
     /**
@@ -31,7 +31,7 @@ class DummyClass extends Repository {
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function all($columns = ['*']) {
-        // return $this->get($columns);
+        return $this->get($columns);
     }
 
     /**
@@ -41,7 +41,7 @@ class DummyClass extends Repository {
      * @return \DummyFullModelClass
      */
     public function get($columns = ['*']) {
-        // return $this->DummyModelVariable->get($columns);
+        return $this->repo->get($columns);
     }
 
     /**
@@ -51,7 +51,7 @@ class DummyClass extends Repository {
      * @return \DummyFullModelClass
      */
     public function find($id) {
-        // return $this->DummyModelVariable->findOrFail($id);
+        // return $this->repo->findOrFail($id);
     }
 
     /**
@@ -61,7 +61,7 @@ class DummyClass extends Repository {
      * @return bool
      */
     public function create(array $attributes) {
-        // return $this->DummyModelVariable->create($attributes);
+        // return $this->repo->create($attributes);
     }
 
     /**
@@ -72,7 +72,7 @@ class DummyClass extends Repository {
      * @return bool
      */
     public function update(array $attributes = []) {
-        // return $this->DummyModelVariable->update($attributes);
+        // return $this->repo->update($attributes);
     }
 
     /**
@@ -83,6 +83,6 @@ class DummyClass extends Repository {
      * @throws \Exception
      */
     public function delete($id) {
-        // return $this->DummyModelVariable->findOrFail($id)->delete();
+        // return $this->repo->findOrFail($id)->delete();
     }
 }
