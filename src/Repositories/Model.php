@@ -2,10 +2,14 @@
 
 namespace PPSpaces\Repositories;
 
+use JsonSerializable;
+use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Contracts\Routing\UrlRoutable;
 use PPSpaces\Contracts\Model as RepositoryContract;
 
-abstract class Model implements RepositoryContract, UrlRoutable {
+abstract class Model implements RepositoryContract, JsonSerializable, UrlRoutable {
+
+    use ForwardsCalls;
 
     /**
      * The repository instance.
@@ -84,6 +88,16 @@ abstract class Model implements RepositoryContract, UrlRoutable {
      */
     public function delete($id) {
         return $this->repository->findOrFail($id)->delete();
+    }
+
+    /**
+     * Destroy the models for the given IDs.
+     *
+     * @param  \Illuminate\Support\Collection|array|int  $ids
+     * @return int
+     */
+    public static function destroy($ids) {
+        //
     }
 
     /**
