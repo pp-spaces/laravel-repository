@@ -56,7 +56,7 @@ class RepositoryMakeCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\Repositories';
+        return $rootNamespace.'\Http\Repositories';
     }
 
     /**
@@ -77,7 +77,7 @@ class RepositoryMakeCommand extends GeneratorCommand
             $replace = $this->buildModelReplacements($replace);
         }
 
-        $replace["use {$controllerNamespace}\Controller;\n"] = '';
+        // $replace["use {$controllerNamespace}\Controller;\n"] = '';
 
         return str_replace(
             array_keys($replace), array_values($replace), parent::buildClass($name)

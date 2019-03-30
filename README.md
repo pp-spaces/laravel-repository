@@ -90,7 +90,7 @@ php artisan make:repository UserRepository --model=User
 Update `UserRepository` logic:
 
 ```php
-namespace App\Repositories;
+namespace App\Http\Repositories;
 
 use App\User;
 use PPSpaces\Repositories\Model as Repository;
@@ -116,7 +116,7 @@ class UserRepository extends Repository {
 Within your `UserController` assume you have a resource controller created. Inject the `UserRepository` to the contoller.
 
 ```php
-use App\Repositories\UserRepository;
+use App\Http\Repositories\UserRepository;
 
 class UserController extends Controller
 {
