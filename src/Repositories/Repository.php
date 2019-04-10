@@ -59,7 +59,7 @@ abstract class Repository implements RepositoryContract, JsonSerializable, UrlRo
     public function __construct(App $app) {
         $this->app = $app;
 
-        $this->makeRepository();
+        $this->initializeRepository();
     }
 
     /**
@@ -158,7 +158,7 @@ abstract class Repository implements RepositoryContract, JsonSerializable, UrlRo
      *
      * @throws PPSpaces\Exceptions\RepositoryException
      */
-    public function makeRepository() {
+    public function initializeRepository() {
         $model = $this->app->make($this->model);
 
         if (!$model instanceof Model) {

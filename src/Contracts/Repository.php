@@ -86,5 +86,5 @@ interface Repository
      *
      * @throws PPSpaces\Exceptions\RepositoryException
      */
-    public function makeRepository();
+    public function initializeRepository();
 }
