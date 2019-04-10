@@ -3,7 +3,7 @@
 namespace DummyNamespace;
 
 use DummyFullModelClass;
-use PPSpaces\Repositories\Model as Repository;
+use PPSpaces\Repositories\Repository;
 
 class DummyClass extends Repository {
 
@@ -12,17 +12,15 @@ class DummyClass extends Repository {
      *
      * @var \DummyFullModelClass
      */
-    protected $repository;
+    protected $model = "DummyFullModelClass";
 
     /**
-     * Create a new repository instance.
+     * Scope a query for the model before executing
      *
-     * @param  \DummyFullModelClass  $DummyModelVariable
+     * @param \Illuminate\Database\Query\Builder $query
      * @return void
      */
-    public function __construct(DummyModelClass $DummyModelVariable) {
-        $this->repository = $DummyModelVariable;
-    }
+    public function before($query) {}
 
     /**
      * Get all of the models from the database.
