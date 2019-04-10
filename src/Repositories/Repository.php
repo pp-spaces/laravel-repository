@@ -8,15 +8,12 @@ use JsonSerializable;
 use Illuminate\Container\Container as App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Traits\ForwardsCalls;
 use Illuminate\Contracts\Routing\UrlRoutable;
 
 use PPSpaces\Exceptions\RepositoryException;
 use PPSpaces\Contracts\Repository as RepositoryContract;
 
 abstract class Repository implements RepositoryContract, JsonSerializable, UrlRoutable {
-
-    // use ForwardsCalls;
 
     /**
      * The application instance being facaded.
