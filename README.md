@@ -186,7 +186,7 @@ public function show(UserRepository $user)
 
 > Upgrade from `v0.0.9` or earilier to `v1.0.0`
 
-### Rename main `Repository` namespace
+### What you need to do
 
 ```diff
 namespace App\Http\Repositories;
