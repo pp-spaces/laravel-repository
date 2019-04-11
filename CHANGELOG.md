@@ -8,7 +8,10 @@
 
 ### UPGRADE
 
-- Change `use PPSpaces\Repositories\Model as Repository` to `use PPSpaces\Repositories\Repository`
+```diff
+- use PPSpaces\Repositories\Model as Repository;
++ use PPSpaces\Repositories\Repository;
+```
 
 ### DEPRECIATED
 

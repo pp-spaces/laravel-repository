@@ -13,6 +13,10 @@
   - [Use Case](#use-case)
   - [Help](#help)
 
+## Upgrade Notice
+
+- [How to upgrade?](#upgrade-notice)
+
 ## What is the Repository Design Pattern
 
 ![Repository Design Pattern](assets/repository_pattern.png)
@@ -92,7 +96,6 @@ Update `UserRepository` logic:
 ```php
 namespace App\Http\Repositories;
 
-use App\User;
 use PPSpaces\Repositories\Model as Repository;
 
 class UserRepository extends Repository {
@@ -174,6 +177,45 @@ public function show(UserRepository $user)
     // e.g. /api/user/1
     // $user will be the result of $user->id === 1
     return $user;
+}
+```
+
+## Upgrade Notice
+
+> Upgrade from `v0.0.9` or earilier to `v1.0.0`
+
+### Rename main `Repository` namespace
+
+```diff
+namespace App\Http\Repositories;
+
+- use App\User;
+
+- use PPSpaces\Repositories\Model as Repository;
++ use PPSpaces\Repositories\Repository;
+
+class UserRepository extends Repository {
+
++    /**
++     * The user model instance.
++     *
++     * @var \App\User
++     */
++    protected $model = "App\User";
+
+-     protected $user;
+
+-    public function __construct(User $user) {
+-        $this->user = $user;
+-    }
+
+    public function index()
+    {
+         // `$this->users->all()` will always resolved the same result as `$this->users->get()`
+-        return $this->users->all();
++        return $this->users->get();
+    }
+
 }
 ```
 
