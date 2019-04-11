@@ -97,23 +97,43 @@ use PPSpaces\Repositories\Model as Repository;
 
 class UserRepository extends Repository {
 
-    protected $user;
+    /**
+     * The user model instance.
+     *
+     * @var \App\User
+     */
+    protected $model = "App\User";
 
-    public function __construct(User $user) {
-        $this->user = $user;
+    /**
+     * Scope a query for the model before executing
+     *
+     * @param \Illuminate\Database\Query\Builder $query
+     * @return void
+     */
+    public function before($query) {
+        $query->role('staff');
     }
 
+    /**
+     * Get all of the models from the database.
+     *
+     * @param  array|mixed  $columns
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function all($columns = ['*']) {
-        return $this->user
-            ->role('staff')
-            ->paginate();
+        $users = $this->repository
+                    ->active()
+                    ->orderBy('updated_at', 'DESC')
+                    ->get();
+
+        return $users;
     }
 }
 ```
 
 > NOTE: Check `PPSpaces\Repositories\Model` for available methods that you may override. Keep in mind that you still have access to all Model instance that you've created. The `$this->user` is the instance of your `\App\User` model.
 
-Within your `UserController` assume you have a resource controller created. Inject the `UserRepository` to the contoller.
+Within your `UserController` assume you have a resource controller created. Inject the `UserRepository` to the contoller. Now you can access the repository in your controller method:
 
 ```php
 use App\Http\Repositories\UserRepository;
@@ -126,15 +146,31 @@ class UserController extends Controller
     {
         $this->users = $users;
     }
+
+    public function index()
+    {
+        return $this->users->all();
+    }
 }
 ```
 
-Now you can access the repository in your controller method:
+Or alternatively, you may use **Route Model Binding** on the controller actions whose `type-hinted` variable names match a route segment name.
+
+> Read more about [Route Model Binding](https://laravel.com/docs/master/routing#route-model-binding) here
 
 ```php
-public function index()
+public function index(UserRepository $user)
 {
-    return $this->users->all();
+    return $user->all();
+}
+
+public function show(UserRepository $user)
+{
+    // Authorizing the repository model
+    // Check https://laravel.com/docs/master/authorization
+    $this->authorize('view', $user->model());
+
+    return $user->all();
 }
 ```
 
