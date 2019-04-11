@@ -98,7 +98,7 @@ Update `UserRepository` logic:
 ```php
 namespace App\Http\Repositories;
 
-use PPSpaces\Repositories\Model as Repository;
+use PPSpaces\Repositories\Repository;
 
 class UserRepository extends Repository {
 
