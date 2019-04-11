@@ -120,7 +120,7 @@ class UserRepository extends Repository {
      * @param  array|mixed  $columns
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function all($columns = ['*']) {
+    public function get($columns = ['*']) {
         $users = $this->repository
                     ->active()
                     ->orderBy('updated_at', 'DESC')
