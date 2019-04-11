@@ -3,7 +3,6 @@
 namespace PPSpaces\Repositories;
 
 use ReflectionClass;
-use JsonSerializable;
 
 use Illuminate\Container\Container as App;
 
@@ -11,9 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Routing\UrlRoutable;
 
 use PPSpaces\Exceptions\RepositoryException;
+use PPSpaces\Repositories\RepositoryCollection;
 use PPSpaces\Contracts\Repository as RepositoryContract;
 
-abstract class Repository implements RepositoryContract, JsonSerializable, UrlRoutable {
+abstract class Repository implements RepositoryContract, UrlRoutable
+{
 
     /**
      * The application instance being facaded.
@@ -68,7 +69,7 @@ abstract class Repository implements RepositoryContract, JsonSerializable, UrlRo
      * @param \Illuminate\Database\Query\Builder $query
      * @return void
      */
-    public function before($query) {}
+    abstract public function before($query);
 
     /**
      * Get all of the models from the database.
@@ -138,9 +139,7 @@ abstract class Repository implements RepositoryContract, JsonSerializable, UrlRo
      * @param  \Illuminate\Support\Collection|array|int  $ids
      * @return int
      */
-    public static function destroy($ids) {
-        //
-    }
+    abstract static function destroy($ids);
 
     /**
      * Specify Model class name
@@ -148,7 +147,7 @@ abstract class Repository implements RepositoryContract, JsonSerializable, UrlRo
      * @return string
      */
     public function model() {
-        return $this->model;
+        return $this->resolved;
     }
 
     /**
@@ -206,32 +205,16 @@ abstract class Repository implements RepositoryContract, JsonSerializable, UrlRo
     }
 
     /**
-     * Convert the object into something JSON serializable.
-     *
-     * @return array
-     */
-    public function jsonSerialize()
-    {
-        return $this->resolved->toArray();
-    }
-
-    /**
-     * Convert the model instance to an array.
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        return $this->resolved->toArray();
-    }
-
-    /**
      * Convert the model to its string representation.
      *
      * @return string
      */
     public function __toString()
     {
-        return $this->resolved->toJson();
+        if (isset($this->resolved)) {
+            return $this->resolved->toJson();
+        }
+
+        return null;
     }
 }
