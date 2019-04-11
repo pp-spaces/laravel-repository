@@ -15,6 +15,8 @@
 
 ## Upgrade Notice
 
+> NOTE: The reason why I modified how the `Repository` is being created because I want the `Repository` to use `Route Model Binding` for faster data query.
+
 - [How to upgrade?](#how-to-upgrade)
 
 ## What is the Repository Design Pattern
