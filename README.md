@@ -15,7 +15,7 @@
 
 ## Upgrade Notice
 
-- [How to upgrade?](#upgrade-notice)
+- [How to upgrade?](#how-to-upgrade)
 
 ## What is the Repository Design Pattern
 
@@ -180,7 +180,7 @@ public function show(UserRepository $user)
 }
 ```
 
-## Upgrade Notice
+## How to upgrade?
 
 > Upgrade from `v0.0.9` or earilier to `v1.0.0`
 
