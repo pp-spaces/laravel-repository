@@ -149,7 +149,7 @@ class UserController extends Controller
 
     public function index()
     {
-        return $this->users->all();
+        return $this->users->get();
     }
 }
 ```
@@ -161,7 +161,7 @@ Or alternatively, you may use **Route Model Binding** on the controller actions 
 ```php
 public function index(UserRepository $user)
 {
-    return $user->all();
+    return $user->get();
 }
 
 public function show(UserRepository $user)
@@ -170,7 +170,10 @@ public function show(UserRepository $user)
     // Check https://laravel.com/docs/master/authorization
     $this->authorize('view', $user->model());
 
-    return $user->all();
+    // This $user will resolved by the id provided by the router
+    // e.g. /api/user/1
+    // $user will be the result of $user->id === 1
+    return $user;
 }
 ```
 
