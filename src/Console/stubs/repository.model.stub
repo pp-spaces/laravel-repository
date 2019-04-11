@@ -23,16 +23,6 @@ class DummyClass extends Repository {
     public function before($query) {}
 
     /**
-     * Get all of the models from the database.
-     *
-     * @param  array|mixed  $columns
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
-    public function all($columns = ['*']) {
-        return $this->get($columns);
-    }
-
-    /**
      * Dynamically retrieve attributes on the model.
      *
      * @param  array  $columns
