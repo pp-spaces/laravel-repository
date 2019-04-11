@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.0.0 - 2019-04-11
+
+- Major overhauled of the `Base Repository` class
+- Add **Route Model Binding** to the Repository for faster data query
+- Add `before` hook to add query scope
+
+### UPGRADE
+
+```diff
+- use PPSpaces\Repositories\Model as Repository;
++ use PPSpaces\Repositories\Repository;
+```
+
+### DEPRECIATED
+
+- Drop the use of injecting **Model** from the `__construct`
+- repository.model.stub: `all` method will not be part of the generated Repository class
+
 ## 0.0.9 - 2019-03-27
 
 - Add `CHANGELOG.md`, It's better to have this

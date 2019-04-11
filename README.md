@@ -13,6 +13,12 @@
   - [Use Case](#use-case)
   - [Help](#help)
 
+## Upgrade Notice
+
+> NOTE: The reason why I modified how the `Repository` is being created because I want the `Repository` to use `Route Model Binding` for faster data query.
+
+- [How to upgrade?](#how-to-upgrade)
+
 ## What is the Repository Design Pattern
 
 ![Repository Design Pattern](assets/repository_pattern.png)
@@ -92,28 +98,47 @@ Update `UserRepository` logic:
 ```php
 namespace App\Http\Repositories;
 
-use App\User;
 use PPSpaces\Repositories\Model as Repository;
 
 class UserRepository extends Repository {
 
-    protected $user;
+    /**
+     * The user model instance.
+     *
+     * @var \App\User
+     */
+    protected $model = "App\User";
 
-    public function __construct(User $user) {
-        $this->user = $user;
+    /**
+     * Scope a query for the model before executing
+     *
+     * @param \Illuminate\Database\Query\Builder $query
+     * @return void
+     */
+    public function before($query) {
+        $query->role('staff');
     }
 
-    public function all($columns = ['*']) {
-        return $this->user
-            ->role('staff')
-            ->paginate();
+    /**
+     * Get all of the models from the database.
+     *
+     * @param  array|mixed  $columns
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function get($columns = ['*']) {
+        $users = $this->repository
+                    ->active()
+                    ->orderBy('updated_at', 'DESC')
+                    ->get();
+
+        return $users;
     }
 }
 ```
 
 > NOTE: Check `PPSpaces\Repositories\Model` for available methods that you may override. Keep in mind that you still have access to all Model instance that you've created. The `$this->user` is the instance of your `\App\User` model.
 
-Within your `UserController` assume you have a resource controller created. Inject the `UserRepository` to the contoller.
+Within your `UserController` assume you have a resource controller created. Inject the `UserRepository` to the contoller. Now you can access the repository in your controller method:
 
 ```php
 use App\Http\Repositories\UserRepository;
@@ -126,15 +151,73 @@ class UserController extends Controller
     {
         $this->users = $users;
     }
+
+    public function index()
+    {
+        return $this->users->get();
+    }
 }
 ```
 
-Now you can access the repository in your controller method:
+Or alternatively, you may use **Route Model Binding** on the controller actions whose `type-hinted` variable names match a route segment name.
+
+> Read more about [Route Model Binding](https://laravel.com/docs/master/routing#route-model-binding) here
 
 ```php
-public function index()
+public function index(UserRepository $user)
 {
-    return $this->users->all();
+    return $user->get();
+}
+
+public function show(UserRepository $user)
+{
+    // Authorizing the repository model
+    // Check https://laravel.com/docs/master/authorization
+    $this->authorize('view', $user->model());
+
+    // This $user will resolved by the id provided by the router
+    // e.g. /api/user/1
+    // $user will be the result of $user->id === 1
+    return $user;
+}
+```
+
+## How to upgrade?
+
+> Upgrade from `v0.0.9` or earilier to `v1.0.0`
+
+### What you need to do
+
+```diff
+namespace App\Http\Repositories;
+
+- use App\User;
+
+- use PPSpaces\Repositories\Model as Repository;
++ use PPSpaces\Repositories\Repository;
+
+class UserRepository extends Repository {
+
++    /**
++     * The user model instance.
++     *
++     * @var \App\User
++     */
++    protected $model = "App\User";
+
+-     protected $user;
+
+-    public function __construct(User $user) {
+-        $this->user = $user;
+-    }
+
+    public function index()
+    {
+         // `$this->users->all()` will always resolved the same result as `$this->users->get()`
+-        return $this->users->all();
++        return $this->users->get();
+    }
+
 }
 ```
 

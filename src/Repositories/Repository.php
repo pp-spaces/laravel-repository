@@ -2,21 +2,54 @@
 
 namespace PPSpaces\Repositories;
 
-use JsonSerializable;
-use Illuminate\Support\Traits\ForwardsCalls;
+use ReflectionClass;
+
+use Illuminate\Container\Container as App;
+
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Routing\UrlRoutable;
-use PPSpaces\Contracts\Model as RepositoryContract;
 
-abstract class Model implements RepositoryContract, JsonSerializable, UrlRoutable {
+use PPSpaces\Exceptions\RepositoryException;
+use PPSpaces\Repositories\RepositoryCollection;
+use PPSpaces\Contracts\Repository as RepositoryContract;
 
-    use ForwardsCalls;
+abstract class Repository implements RepositoryContract, UrlRoutable
+{
+
+    /**
+     * The application instance being facaded.
+     *
+     * @var \Illuminate\Container\Container
+     */
+    protected $app;
+
+    /**
+     * The Model class name.
+     *
+     * @var string
+     */
+    protected $model;
 
     /**
      * The repository instance.
      *
-     * @var \Illuminate\Database\Eloquent\Model
+     * @var mixed
      */
     protected $repository;
+
+    /**
+     * The model instance.
+     *
+     * @var \Illuminate\Database\Eloquent\Model
+     */
+    protected $resolver;
+
+    /**
+     * The resolved model instance.
+     *
+     * @var \Illuminate\Database\Eloquent\Model
+     */
+    protected $resolved;
 
     /**
      * Create a new repository instance.
@@ -24,9 +57,19 @@ abstract class Model implements RepositoryContract, JsonSerializable, UrlRoutabl
      * @param  \Illuminate\Database\Eloquent\Model  $model
      * @return void
      */
-    public function __construct($model) {
-        $this->repository = $model;
+    public function __construct(App $app) {
+        $this->app = $app;
+
+        $this->initializeRepository();
     }
+
+    /**
+     * Scope a query for the model before executing
+     *
+     * @param \Illuminate\Database\Query\Builder $query
+     * @return void
+     */
+    abstract public function before($query);
 
     /**
      * Get all of the models from the database.
@@ -96,8 +139,34 @@ abstract class Model implements RepositoryContract, JsonSerializable, UrlRoutabl
      * @param  \Illuminate\Support\Collection|array|int  $ids
      * @return int
      */
-    public static function destroy($ids) {
-        //
+    abstract static function destroy($ids);
+
+    /**
+     * Specify Model class name
+     *
+     * @return string
+     */
+    public function model() {
+        return $this->resolved;
+    }
+
+    /**
+     * Resolve the given model from the container.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     *
+     * @throws PPSpaces\Exceptions\RepositoryException
+     */
+    public function initializeRepository() {
+        $model = $this->app->make($this->model);
+
+        if (!$model instanceof Model) {
+            throw new RepositoryException("Class {$this->model} must be an instance of Illuminate\\Database\\Eloquent\\Model");
+        }
+
+        $this->repository = $model->newQuery();
+
+        $this->before($this->repository);
     }
 
     /**
@@ -107,7 +176,7 @@ abstract class Model implements RepositoryContract, JsonSerializable, UrlRoutabl
      */
     public function getRouteKey()
     {
-        return $this->repository->getAttribute($this->getRouteKeyName());
+        return $this->resolver->getAttribute($this->getRouteKeyName());
     }
 
     /**
@@ -117,7 +186,7 @@ abstract class Model implements RepositoryContract, JsonSerializable, UrlRoutabl
      */
     public function getRouteKeyName()
     {
-        return $this->repository->getKeyName();
+        return $this->resolver->getKeyName();
     }
 
     /**
@@ -128,17 +197,11 @@ abstract class Model implements RepositoryContract, JsonSerializable, UrlRoutabl
      */
     public function resolveRouteBinding($value)
     {
-        return $this->repository->where($this->getRouteKeyName(), $value)->first();
-    }
+        $this->resolver = (new $this->model);
 
-    /**
-     * Convert the object into something JSON serializable.
-     *
-     * @return array
-     */
-    public function jsonSerialize()
-    {
-        return $this->repository->toArray();
+        $this->resolved = $this->resolver->where($this->getRouteKeyName(), $value)->first() ?? abort(404);
+
+        return $this;
     }
 
     /**
@@ -148,6 +211,10 @@ abstract class Model implements RepositoryContract, JsonSerializable, UrlRoutabl
      */
     public function __toString()
     {
-        return $this->repository->toJson();
+        if (isset($this->resolved)) {
+            return $this->resolved->toJson();
+        }
+
+        return null;
     }
 }

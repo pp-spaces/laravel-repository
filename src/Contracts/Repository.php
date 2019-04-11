@@ -2,8 +2,16 @@
 
 namespace PPSpaces\Contracts;
 
-interface Model
+interface Repository
 {
+
+    /**
+     * Scope a query for the model before executing
+     *
+     * @param \Illuminate\Database\Query\Builder $query
+     * @return void
+     */
+    public function before($query);
 
     /**
      * Get all of the models from the database.
@@ -65,9 +73,18 @@ interface Model
     public static function destroy($ids);
 
     /**
-     * Convert the model to its string representation.
+     * Specify Model class name
      *
      * @return string
      */
-    public function __toString();
+    public function model();
+
+    /**
+     * Resolve the given model from the container.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     *
+     * @throws PPSpaces\Exceptions\RepositoryException
+     */
+    public function initializeRepository();
 }
