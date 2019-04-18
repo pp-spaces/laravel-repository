@@ -1,14 +1,8 @@
 {
   "name": "pp-spaces/laravel-repository",
   "description": "Repository Design Pattern implementation for Laravel",
-  "keywords": [
-    "pp-spaces",
-    "laravel",
-    "repository",
-    "laravel-repository",
-    "repository-pattern"
-  ],
   "type": "library",
+  "homepage": "https://pp-spaces.github.io/laravel-repository/",
   "license": "MIT",
   "authors": [
     {
@@ -18,17 +12,32 @@
       "role": "Developer"
     }
   ],
+  "keywords": [
+    "pp-spaces",
+    "laravel",
+    "repository",
+    "laravel-repository",
+    "repository-pattern"
+  ],
   "require": {
     "php": ">=7.0",
-    "illuminate/contracts": "~5.3.0|~5.4.0|~5.5.0|~5.6.0|~5.7.0|~5.8.0",
     "illuminate/console": "~5.3.0|~5.4.0|~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+    "illuminate/contracts": "~5.3.0|~5.4.0|~5.5.0|~5.6.0|~5.7.0|~5.8.0",
     "illuminate/support": "~5.3.0|~5.4.0|~5.5.0|~5.6.0|~5.7.0|~5.8.0"
+  },
+  "require-dev": {
+    "fzaninotto/faker": "^1.8",
+    "mockery/mockery": "^1.2",
+    "orchestra/testbench": "^3.5",
+    "symfony/thanks": "^1.1"
   },
   "autoload": {
     "psr-4": {
-      "PPSpaces\\": "src"
+      "PPSpaces\\": "src/",
+      "PPSpaces\\Tests\\": "tests/"
     }
   },
+  "minimum-stability": "stable",
   "config": {
     "sort-packages": true
   },
@@ -38,5 +47,10 @@
         "PPSpaces\\RepositoryServiceProvider"
       ]
     }
+  },
+  "scripts": {
+    "test": [
+      "vendor/bin/phpunit --testdox --coverage-text"
+    ]
   }
 }
