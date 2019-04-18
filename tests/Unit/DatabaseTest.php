@@ -10,7 +10,7 @@ use PPSpaces\Tests\App\User;
  */
 class DatabaseTest extends TestCase
 {
-    public function test_it_can_migrate_test_database()
+    public function test_it_runs_the_migrations()
     {
         $connection = config('database.default');
 
