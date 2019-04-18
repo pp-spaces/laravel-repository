@@ -2,6 +2,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/pp-spaces/laravel-repository/v/stable)](https://packagist.org/packages/pp-spaces/laravel-repository)
 [![Total Downloads](https://poser.pugx.org/pp-spaces/laravel-repository/downloads)](https://packagist.org/packages/pp-spaces/laravel-repository)
+[![Build Status](https://travis-ci.org/pp-spaces/laravel-repository.svg?branch=develop)](https://travis-ci.org/pp-spaces/laravel-repository)
 [![License](https://poser.pugx.org/pp-spaces/laravel-repository/license)](https://packagist.org/packages/pp-spaces/laravel-repository)
 
 ## Contents
