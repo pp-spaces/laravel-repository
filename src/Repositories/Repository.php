@@ -4,8 +4,6 @@ namespace PPSpaces\Repositories;
 
 use ReflectionClass;
 
-use Illuminate\Container\Container as App;
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Routing\UrlRoutable;
 
@@ -57,9 +55,8 @@ abstract class Repository implements RepositoryContract, UrlRoutable
      * @param  \Illuminate\Database\Eloquent\Model  $model
      * @return void
      */
-    public function __construct(App $app) {
-        $this->app = $app;
-
+    public function __construct() {
+        // Initialize Repository Instance
         $this->initializeRepository();
     }
 
@@ -69,7 +66,9 @@ abstract class Repository implements RepositoryContract, UrlRoutable
      * @param \Illuminate\Database\Query\Builder $query
      * @return void
      */
-    abstract public function before($query);
+    public function before($query) {
+        //
+    }
 
     /**
      * Get all of the models from the database.
@@ -139,7 +138,9 @@ abstract class Repository implements RepositoryContract, UrlRoutable
      * @param  \Illuminate\Support\Collection|array|int  $ids
      * @return int
      */
-    abstract static function destroy($ids);
+    static function destroy($ids) {
+        //
+    }
 
     /**
      * Specify Model class name
@@ -158,14 +159,20 @@ abstract class Repository implements RepositoryContract, UrlRoutable
      * @throws PPSpaces\Exceptions\RepositoryException
      */
     public function initializeRepository() {
+        // Loading application instance
+        $this->app = app();
+
+        // Making model
         $model = $this->app->make($this->model);
 
         if (!$model instanceof Model) {
             throw new RepositoryException("Class {$this->model} must be an instance of Illuminate\\Database\\Eloquent\\Model");
         }
 
+        // Create repository model query
         $this->repository = $model->newQuery();
 
+        // Inject before scope
         $this->before($this->repository);
     }
 
@@ -215,6 +222,6 @@ abstract class Repository implements RepositoryContract, UrlRoutable
             return $this->resolved->toJson();
         }
 
-        return null;
+        return $this->get()->toJson();
     }
 }
