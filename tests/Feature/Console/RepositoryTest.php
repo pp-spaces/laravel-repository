@@ -23,6 +23,10 @@ class RepositoryTest extends TestCase
             'name' => 'UserRepository',
             '--model' => 'PPSpaces/Tests/App/User',
             '--no-interaction'
-        ])->assertExitCode(0);
+        ])
+            ->expectsQuestion('A App\PPSpaces\Tests\App\User model does not exist. Do you want to generate it?', 'yes')
+            ->expectsOutput('Model created successfully.')
+            ->expectsOutput('Repository created successfully.')
+            ->assertExitCode(0);
     }
 }
