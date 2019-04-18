@@ -31,7 +31,8 @@
   },
   "autoload": {
     "psr-4": {
-      "PPSpaces\\": "src/"
+      "PPSpaces\\": "src/",
+      "PPSpaces\\Tests\\": "tests/"
     }
   },
   "minimum-stability": "stable",
@@ -44,5 +45,10 @@
         "PPSpaces\\RepositoryServiceProvider"
       ]
     }
+  },
+  "scripts": {
+    "test": [
+      "vendor/bin/phpunit --testdox"
+    ]
   }
 }
