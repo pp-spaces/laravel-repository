@@ -66,7 +66,9 @@ abstract class Repository implements RepositoryContract, UrlRoutable
      * @param \Illuminate\Database\Query\Builder $query
      * @return void
      */
-    abstract public function before($query);
+    public function before($query) {
+        //
+    }
 
     /**
      * Get all of the models from the database.
@@ -136,7 +138,9 @@ abstract class Repository implements RepositoryContract, UrlRoutable
      * @param  \Illuminate\Support\Collection|array|int  $ids
      * @return int
      */
-    abstract static function destroy($ids);
+    static function destroy($ids) {
+        //
+    }
 
     /**
      * Specify Model class name
