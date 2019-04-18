@@ -10,14 +10,13 @@ use PPSpaces\Tests\App\User;
  */
 class DatabaseTest extends TestCase
 {
-    public function test_it_uses_the_default_database_connection()
+    public function test_it_can_migrate_test_database()
     {
-        factory(User::class)->create();
-
         $connection = config('database.default');
 
-        $user = User::first();
+        factory(User::class)->create();
 
+        $user = User::first();
 
         $this->assertEquals($connection, $user->getConnectionName());
     }
