@@ -16,17 +16,4 @@ class RepositoryTest extends TestCase
             'name' => 'LogsRepository'
         ])->assertExitCode(0);
     }
-
-    public function test_it_can_generate_model_repository_command()
-    {
-        $this->artisan('make:repository', [
-            'name' => 'UserRepository',
-            '--model' => 'User',
-            '--no-interaction'
-        ])
-            // ->expectsQuestion('A App\User model does not exist. Do you want to generate it? (yes/no)', 'yes')
-            // ->expectsOutput('Model created successfully.')
-            // ->expectsOutput('Repository created successfully.')
-            ->assertExitCode(0);
-    }
 }
