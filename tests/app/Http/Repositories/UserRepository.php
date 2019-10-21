@@ -11,6 +11,6 @@ class UserRepository extends Repository {
      *
      * @var \PPSpaces\Tests\App\User
      */
-    protected $model = "PPSpaces\Tests\App\User";
+    protected $model = "\PPSpaces\Tests\App\User";
 
 }
