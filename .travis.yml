@@ -1,7 +1,6 @@
 language: php
 
 php:
-  - 7.1
   - 7.2
   - 7.3
 
@@ -10,6 +9,7 @@ dist: trusty
 install:
   - composer self-update
   - composer install
+  - composer dump-autoload
 
 script:
   - "./vendor/bin/phpunit --testdox --coverage-text"

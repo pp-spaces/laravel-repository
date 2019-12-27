@@ -22,21 +22,4 @@ abstract class TestCase extends BaseTestCase
     {
         return ['PPSpaces\RepositoryServiceProvider'];
     }
-
-    /**
-     * Get package aliases.  In a normal app environment these would be added to
-     * the 'aliases' array in the config/app.php file.  If your package exposes an
-     * aliased facade, you should add the alias here, along with aliases for
-     * facades upon which your package depends, e.g. Cartalyst/Sentry.
-     *
-     * @param  \Illuminate\Foundation\Application  $app
-     *
-     * @return array
-     */
-    protected function getPackageAliases($app)
-    {
-        return [
-            'PPSpaces' => 'PPSpaces\Facade'
-        ];
-    }
 }
